@@ -1,215 +1,268 @@
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #87CEEB, #4682B4);
+}
+
+.wrapper {
+  width: 400px;
+  max-width: 90%;
+  background: #fff;
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.wrapper header {
+  color: #333333;
+  font-size: 21px;
+  font-weight: bolder;
+  padding: 16px 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+/* Arrow icon styling */
+header i {
+  cursor: pointer;
+  font-size: 0em;
+  margin-right: 8px;
+}
+
+.wrapper.active header i {
+  font-size: 30px;
+  margin-left: 5px;
+}
+
+/* Input area styling */
+.wrapper .input-part {
+  margin: 20px 25px 30px;
+}
+
+.input-part .info-txt {
+  display: none;
+  font-size: 17px;
+  text-align: center;
+  padding: 12px 10px;
+  border-radius: 7px;
+  margin-bottom: 15px;
+}
+
+.input-part :where(input, button) {
+  width: 100%;
+  height: 55px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  border-radius: 7px;
+}
+
+.input-part input {
+  width: 75% !important;
+  text-align: center;
+  border: 1px solid #bfbfbf;
+}
+
+.input-part input:is(:focus, :valid) {
+  border: 1px solid #8d8b8b;
+}
+
+.input-part input::placeholder {
+  color: #bfbfbf;
+}
+
+.searchArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.searchIcon {
+  border: 1px solid #bfbfbf;
+  border-radius: 10px;
+  background-color: #8d8b8b;
+  color: white;
+  width: 25%;
+  height: 55px;
+  outline: none;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 14px;
+  margin-left: 8px;
+  transition: 0.3s ease;
+}
+
+.searchIcon:hover {
+  background: #6b6a6a;
+}
+
+.input-part .separator {
+  height: 1px;
+  width: 100%;
+  margin: 25px 0;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.separator::before {
+  content: "or";
+  color: #ccc;
+  padding: 0 15px;
+  font-size: 19px;
+  background-color: #fff;
+}
+
+.input-part button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #8d8b8b;
+  transition: 0.3s ease;
+}
+
+.input-part button:hover {
+  background: #6b6a6a;
+}
+
+/* Weather area styling */
+.wrapper .weather-part {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.wrapper.active .weather-part {
+  display: flex;
+}
+
+.weather-part img {
+  width: 170px;
+  max-width: 100%;
+}
+
+.weather-part .temp {
+  display: flex;
+  font-size: 70px;
+  margin-top: 10px;
+}
+
+.weather-part .temp .numb {
+  font-weight: 100;
+}
+
+.weather-part .temp .deg {
+  font-size: 40px;
+  margin: 10px 5px 0 0;
+  display: block;
+}
+
+.weather-part .weather {
+  font-size: 17px;
+  text-align: center;
+  margin: -5px 20px 15px;
+}
+
+.weather-part .location {
+  display: flex;
+  font-size: 19px;
+  margin-bottom: 30px;
+  text-align: center;
+  align-items: flex-start;
+  padding: 0 20px;
+}
+
+.location i {
+  font-size: 21px;
+  margin: 0 5px 0 0;
+}
+
+.weather-part .bottom-details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #bfbfbf;
+}
+
+.bottom-details .column {
+  width: 100%;
+  display: flex;
+  padding: 15px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.column i {
+  color: #8d8b8b;
+  font-size: 40px;
+}
+
+.column.humidity {
+  border-left: 1px solid #bfbfbf;
+}
+
+.column .details {
+  margin-left: 3px;
+}
+
+.details .temp,
+.humidity span {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: -3px;
+}
+
+.details .temp .deg {
+  margin: 0;
+  font-size: 17px;
+  padding: 0 2px 0 1px;
+}
+
+.column .details p {
+  font-size: 14px;
+  margin-top: -2px;
+}
+
+.humidity i {
+  font-size: 37px;
+}
+
+@media screen and (max-width: 770px) {
+  body {
     display: flex;
-    align-items: center;
     justify-content: center;
-    background: url(images/background.jpg) no-repeat;
-    background-position: center;
-    background-size: cover;
-}
-
-.container {
-    width: 400px;
-    height: auto;
-    min-height: 400px;
-    padding: 30px;
-    background: transparent;
-    border: 2px solid #e6b7eca1;
-    border-radius: 10px;
-    backdrop-filter: blur(15px);
-}
-
-h1 {
-    color: #eee;
-    text-align: center;
-    margin-bottom: 36px;
-}
-
-.input-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px;
-}
-
-.todo-input {
-    flex: 1;
-    outline: none;
-    padding: 10px 10px 10px 20px;
-    background-color: transparent;
-    border: 2px solid #e6b7eca1;
-    border-radius: 30px;
-    color: #eee;
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-.todo-input::placeholder {
-    color: #bfbfbf;
-}
-
-.add-button {
-    border: none;
-    outline: none;
-    background: #e6b7eca1;
-    color: #fff;
-    font-size: 35px;
-    cursor: pointer;
-    border-radius: 40px;
-    width: 40px;
-    height: 40px;
-}
-
-.empty-image {
-    margin: 55px auto 0;
-    display: block;
-}
-
-.todo {
-    list-style: none;
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    background-color: #463c7b;
-    border-radius: 5px;
-    margin: 10px 0;
-    padding: 10px 12px;
-    border: 2px solid #e6b7eca1;
-    transition: all 0.2s ease;
-}
+  }
 
-.todo:first-child {
-    margin-top: 0;
-}
+  .wrapper {
+    max-width: 400px;
+    max-height: 500px;
+    font-size: 20px;
+    margin: 0 20px 0 20px;
+    overflow-y: auto;
+  }
 
-.todo:last-child {
-    margin-bottom: 0;
-}
+  .wrapper header {
+    font-weight: 400;
+  }
 
-.todo:hover {
-    background-color: #e6b7eca1;
-}
-
-.todo label {
-    cursor: pointer;
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    font-family: 'Roboto', sans-serif;
-    color: #eee;
-}
-
-.todo span {
-    padding-left: 20px;
-    position: relative;
-    cursor: pointer;
-}
-
-span::before {
-    content: "";
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    margin-left: -30px;
-    border-radius: 100px;
-    border: 2px solid #e6b7eca1;
-}
-
-input[type='checkbox'] {
-    visibility: hidden;
-}
-
-input:checked+span {
-    text-decoration: line-through    
-}
-
-.todos {
-    display: flex;
-    padding: 14px;
-    justify-content: space-between;
-    flex-direction: column;
-    column-gap: 10px;
-}
-
-.todo:has(.todo-checkbox:checked) {
-    order: 1;
-    column-gap: 10px;
-}
-
-.todo:hover input:checked+span::before, input:checked+span::before {
-    background: url(images/check.svg) 50% 50% no-repeat #09bb21;
-    border-color: #09bb21;
-}
-
-.todo:hover span::before {
-    border-color: #eee;
-}
-
-.todo .delete-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: #eee;
-    font-size: 24px;
-}
-
-.todos-container {
-    height: 300px;
-    overflow: overlay;
-}
-
-.todos-container::-webkit-scrollbar-track {
-    background: rgb(247, 247, 247);
-    border-radius: 20px
-}
-
-.todos-container::-webkit-scrollbar {
-    width: 0;
-}
-
-.todos-container:hover::-webkit-scrollbar {
-    width: 7px;
-}
-
-.todos-container::-webkit-scrollbar-thumb {
-    background: #d5d5d5;
-    border-radius: 20px;
-}
-
-.filters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px;
-}
-
-.filter {
-    color: #eee;
-    padding: 5px 15px;
-    border-radius: 100px;
-    border: 2px solid #e6b7eca1;
-    transition: all 0.2s ease;
-    cursor: pointer;
-}
-
-.filter.active, .filter:hover {
-    background-color: #e6b7eca1;
-}
-
-.delete-all {
-    display: flex;
-    color: #eee;
-    padding: 7px 15px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.delete-all:hover {
-    border-radius: 5px;
-    background-color: #e6b7eca1;
+  img {
+    max-width: 170px;
+  }
 }
